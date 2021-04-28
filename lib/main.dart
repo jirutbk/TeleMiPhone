@@ -25,6 +25,8 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreen extends State<MainScreen> {
+  String version = "1.5.0";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,10 +37,12 @@ class _MainScreen extends State<MainScreen> {
           IconButton(
             icon: const Icon(Icons.more_vert),
             tooltip: 'เกี่ยวกับ App',
-            onPressed: () {              
+            onPressed: () {
               showAboutDialog(
                   context: context,
-                  applicationVersion: "1.5.0",
+                  applicationIcon:
+                      Icon(Icons.api_sharp, color: Colors.pink, size: 36.0),
+                  applicationVersion: version,
                   applicationLegalese: "ผู้พัฒนา : TanunnasBK");
             },
           ),
@@ -79,7 +83,9 @@ class _MainScreen extends State<MainScreen> {
                 Navigator.pop(context);
                 showAboutDialog(
                     context: context,
-                    applicationVersion: "1.5.0",
+                    applicationIcon:
+                        Icon(Icons.api_sharp, color: Colors.pink, size: 36.0),
+                    applicationVersion: version,
                     applicationLegalese: "ผู้พัฒนา : TanunnasBK");
               },
             ),
@@ -99,7 +105,7 @@ class _MainScreen extends State<MainScreen> {
         backgroundColor: Colors.pinkAccent,
         onPressed: () {},
         child: Icon(
-          Icons.add,
+          Icons.api_sharp,
           color: Colors.white,
         ),
       ),
