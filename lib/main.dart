@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ส่วนของ Stateful widget
 class MainScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -58,7 +57,7 @@ class _MainScreen extends State<MainScreen> {
             DrawerHeader(
               child: Text('รายการทำนาย'),
               decoration: BoxDecoration(
-                color: Colors.lime,
+                color: Colors.pinkAccent,
               ),
             ),
             ListTile(title: Text('หมายเลขโทรศัพท์'), onTap: () {}),
@@ -92,12 +91,12 @@ class _MainScreen extends State<MainScreen> {
         clipBehavior: Clip.antiAlias,
         shape: const CircularNotchedRectangle(),
         child: Container(
-          color: Colors.lime,
+          color: Colors.pinkAccent[100],
           height: 50.0,
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.pinkAccent,
         onPressed: () {},
         child: Icon(
           Icons.add,
