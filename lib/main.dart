@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:flutter/services.dart';
+import 'package:telemiphone/magicNumberList.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,66 +12,99 @@ class MyApp extends StatelessWidget {
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
       title: 'TeleMiPhone',
-      home: HomePage(),
+      home: MainScreen(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
+// ส่วนของ Stateful widget
+class MainScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  State<StatefulWidget> createState() {
+    return _MainScreen();
+  }
 }
 
-class _HomePageState extends State<HomePage> {
-  List _items = [];
-
-  // Fetch content from the json file
-  Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/MagicNumber.json');
-    final data = await json.decode(response);
-    setState(() {
-      _items = data["number"];
-    });
-  }
-
+class _MainScreen extends State<MainScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'TeleMiPhone',
-        ),
+        title: Text('TeleMiPhone'),
+        backgroundColor: Colors.pink,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.more_vert),
+            tooltip: 'เกี่ยวกับ App',
+            onPressed: () {              
+              showAboutDialog(
+                  context: context,
+                  applicationVersion: "1.5.0",
+                  applicationLegalese: "ผู้พัฒนา : TanunnasBK");
+            },
+          ),
+        ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(25),
-        child: Column(
-          children: [
-            ElevatedButton(
-              child: Text('Load Data'),
-              onPressed: readJson,
+      body: Material(
+          color: Colors.pink[100],
+          child: Center(
+              child: Text('ศาสตร์แห่งตัวเลข',
+                  style: TextStyle(color: Colors.white, fontSize: 20.0)))),
+      drawer: Drawer(
+          child: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('รายการทำนาย'),
+              decoration: BoxDecoration(
+                color: Colors.lime,
+              ),
             ),
-
-            // Display the data loaded from sample.json
-            _items.length > 0
-                ? Expanded(
-                    child: ListView.builder(
-                      itemCount: _items.length,
-                      itemBuilder: (context, index) {
-                        return Card(
-                          margin: EdgeInsets.all(10),
-                          child: ListTile(
-                            leading: Text(_items[index]["num"]),
-                            title: Text(_items[index]["title"]),
-                            subtitle: Text(_items[index]["description"]),
-                          ),
-                        );
-                      },
-                    ),
-                  )
-                : Container()
+            ListTile(title: Text('หมายเลขโทรศัพท์'), onTap: () {}),
+            ListTile(
+              title: Text('เลขทะเบียนรถ'),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('แสดงเลขศาสตร์'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MagicNumberList()));
+              },
+            ),
+            ListTile(
+              title: Text('เกี่ยวกับโปรแกรม'),
+              onTap: () {
+                Navigator.pop(context);
+                showAboutDialog(
+                    context: context,
+                    applicationVersion: "1.5.0",
+                    applicationLegalese: "ผู้พัฒนา : TanunnasBK");
+              },
+            ),
           ],
         ),
+      )),
+      extendBody: true,
+      bottomNavigationBar: BottomAppBar(
+        clipBehavior: Clip.antiAlias,
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          color: Colors.lime,
+          height: 50.0,
+        ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        onPressed: () {},
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
