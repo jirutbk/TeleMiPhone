@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
       title: 'TeleMiPhone',
-      home: MainScreen(),  //เรียก splash screen
+      home: MainScreen(), //เรียก splash screen
     );
   }
 }
@@ -55,21 +55,26 @@ class _MainScreen extends State<MainScreen> {
               child: Text('ศาสตร์แห่งตัวเลข',
                   style: TextStyle(color: Colors.white, fontSize: 20.0)))),
       drawer: Drawer(
-          child: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text('รายการทำนาย'),
-              decoration: BoxDecoration(
-                color: Colors.pinkAccent,
-              ),
-            ),
+            Container(
+                height: 90.0,
+                padding: EdgeInsets.all(0.0),
+                margin: EdgeInsets.all(0.0),
+                child: DrawerHeader(
+                  child: Text('รายการเมนู',
+                      style: TextStyle(color: Colors.white, fontSize: 18.0)),
+                  decoration: BoxDecoration(
+                    color: Colors.pinkAccent,
+                  ),
+                )),
             ListTile(title: Text('หมายเลขโทรศัพท์'), onTap: () {}),
             ListTile(
               title: Text('เลขทะเบียนรถ'),
               onTap: () {},
             ),
+            ListTile(title: Text('ปฏิทินจันทรคติ'), onTap: () {}),
             ListTile(
               title: Text('แสดงเลขศาสตร์'),
               onTap: () {
@@ -92,7 +97,7 @@ class _MainScreen extends State<MainScreen> {
             ),
           ],
         ),
-      )),
+      ),
       extendBody: true,
       bottomNavigationBar: BottomAppBar(
         clipBehavior: Clip.antiAlias,

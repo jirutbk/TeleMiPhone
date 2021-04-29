@@ -9,6 +9,12 @@ class MagicNumberList extends StatefulWidget {
 
 class _MagicNumberListState extends State<MagicNumberList> {
   List _items = [];
+  List _searchResult = [];
+  final myController = TextEditingController();
+
+  _MagicNumberListState() {
+    this.readJson();
+  }
 
   // Fetch content from the json file
   Future<void> readJson() async {
@@ -18,6 +24,20 @@ class _MagicNumberListState extends State<MagicNumberList> {
     setState(() {
       _items = data["number"];
     });
+  }
+
+  onSearchTextChanged(String text) async {
+    _searchResult.clear();
+    if (text.isEmpty) {
+      _searchResult = List.of(_items); //copy list member
+      setState(() {});
+      return;
+    }
+    _items.forEach((item) {
+      if (item["num"].contains(text)) _searchResult.add(item);
+    });
+
+    setState(() {});
   }
 
   Widget build(BuildContext context) {
@@ -31,26 +51,42 @@ class _MagicNumberListState extends State<MagicNumberList> {
         ),
         body: Scrollbar(
           child: Padding(
-            padding: const EdgeInsets.all(25),
+            padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
             child: Column(
               children: [
-                ElevatedButton(
-                  child: Text('Load Data'),
-                  onPressed: readJson,
+                Card(
+                  child: ListTile(
+                    leading: Icon(Icons.search),
+                    title: TextField(
+                      controller: myController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                          hintText: 'ค้นหา', border: InputBorder.none),
+                      onChanged: onSearchTextChanged,
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.cancel),
+                      onPressed: () {
+                        myController.clear();
+                        onSearchTextChanged('');
+                      },
+                    ),
+                  ),
                 ),
 
                 // Display the data loaded from sample.json
                 _items.length > 0
                     ? Expanded(
                         child: ListView.builder(
-                          itemCount: _items.length,
+                          itemCount: _searchResult.length,
                           itemBuilder: (context, index) {
                             return Card(
                               margin: EdgeInsets.all(10),
                               child: ListTile(
-                                leading: Text(_items[index]["num"]),
-                                title: Text(_items[index]["title"]),
-                                subtitle: Text(_items[index]["description"]),
+                                leading: Text(_searchResult[index]["num"]),
+                                title: Text(_searchResult[index]["title"]),
+                                subtitle:
+                                    Text(_searchResult[index]["description"]),
                               ),
                             );
                           },
