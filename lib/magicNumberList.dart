@@ -12,7 +12,8 @@ class _MagicNumberListState extends State<MagicNumberList> {
 
   // Fetch content from the json file
   Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/MagicNumber.json');
+    final String response =
+        await rootBundle.loadString('assets/MagicNumber.json');
     final data = await json.decode(response);
     setState(() {
       _items = data["number"];
@@ -21,43 +22,44 @@ class _MagicNumberListState extends State<MagicNumberList> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'เลขศาสตร์',
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            'เลขศาสตร์',
+          ),
+          backgroundColor: Colors.pink,
         ),
-        backgroundColor: Colors.pink,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(25),
-        child: Column(
-          children: [
-            ElevatedButton(
-              child: Text('Load Data'),
-              onPressed: readJson,
-            ),
+        body: Scrollbar(
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  child: Text('Load Data'),
+                  onPressed: readJson,
+                ),
 
-            // Display the data loaded from sample.json
-            _items.length > 0
-                ? Expanded(
-                    child: ListView.builder(
-                      itemCount: _items.length,
-                      itemBuilder: (context, index) {
-                        return Card(                          
-                          margin: EdgeInsets.all(10),
-                          child: ListTile(
-                            leading: Text(_items[index]["num"]),
-                            title: Text(_items[index]["title"]),
-                            subtitle: Text(_items[index]["description"]),                            
-                          ),
-                        );
-                      },
-                    ),
-                  )
-                : Container()
-          ],
-        ),
-      ),
-    );
+                // Display the data loaded from sample.json
+                _items.length > 0
+                    ? Expanded(
+                        child: ListView.builder(
+                          itemCount: _items.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              margin: EdgeInsets.all(10),
+                              child: ListTile(
+                                leading: Text(_items[index]["num"]),
+                                title: Text(_items[index]["title"]),
+                                subtitle: Text(_items[index]["description"]),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                    : Container()
+              ],
+            ),
+          ),
+        ));
   }
 }

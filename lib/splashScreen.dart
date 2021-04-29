@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+/**import 'package:flutter/material.dart';
 import 'package:telemiphone/main.dart';
-import 'package:splashscreen/splashscreen.dart';
+//import 'package:splashscreen/splashscreen.dart';
 
 class MySplashScreen extends StatefulWidget {
   @override
@@ -23,3 +23,4 @@ class _MySplashScreenState extends State<MySplashScreen> {
         loaderColor: Colors.pinkAccent);
   }
 }
+**/

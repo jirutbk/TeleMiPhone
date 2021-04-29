@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telemiphone/magicNumberList.dart';
-import 'package:telemiphone/splashScreen.dart';
+//import 'package:telemiphone/splashScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
       title: 'TeleMiPhone',
-      home: MySplashScreen(),  //เรียก splash screen
+      home: MainScreen(),  //เรียก splash screen
     );
   }
 }
