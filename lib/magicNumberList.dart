@@ -26,6 +26,7 @@ class _MagicNumberListState extends State<MagicNumberList> {
         title: Text(
           'เลขศาสตร์',
         ),
+        backgroundColor: Colors.pink,
       ),
       body: Padding(
         padding: const EdgeInsets.all(25),
@@ -42,12 +43,12 @@ class _MagicNumberListState extends State<MagicNumberList> {
                     child: ListView.builder(
                       itemCount: _items.length,
                       itemBuilder: (context, index) {
-                        return Card(
+                        return Card(                          
                           margin: EdgeInsets.all(10),
                           child: ListTile(
                             leading: Text(_items[index]["num"]),
                             title: Text(_items[index]["title"]),
-                            subtitle: Text(_items[index]["description"]),
+                            subtitle: Text(_items[index]["description"]),                            
                           ),
                         );
                       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telemiphone/magicNumberList.dart';
+import 'package:telemiphone/splashScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
       title: 'TeleMiPhone',
-      home: MainScreen(),
+      home: MySplashScreen(),  //เรียก splash screen
     );
   }
 }
@@ -36,7 +37,7 @@ class _MainScreen extends State<MainScreen> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.more_vert),
-            tooltip: 'เกี่ยวกับ App',
+            tooltip: 'เกี่ยวกับแอพพลิเคชั่น',
             onPressed: () {
               showAboutDialog(
                   context: context,
@@ -78,7 +79,7 @@ class _MainScreen extends State<MainScreen> {
               },
             ),
             ListTile(
-              title: Text('เกี่ยวกับโปรแกรม'),
+              title: Text('เกี่ยวกับแอพพลิเคชั่น'),
               onTap: () {
                 Navigator.pop(context);
                 showAboutDialog(
