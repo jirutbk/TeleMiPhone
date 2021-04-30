@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:telemiphone/magicNumberList.dart';
+import 'package:telemiphone/phoneNumberPage.dart';
 //import 'package:telemiphone/splashScreen.dart';
 
 void main() {
@@ -72,7 +73,9 @@ class _MainScreen extends State<MainScreen> {
                     color: Colors.pinkAccent,
                   ),
                 )),
-            ListTile(title: Text('หมายเลขโทรศัพท์'), onTap: () {}),
+            ListTile(title: Text('หมายเลขโทรศัพท์'), onTap: () {Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PhoneNumberPage()));}),
             ListTile(
               title: Text('เลขทะเบียนรถ'),
               onTap: () {},
