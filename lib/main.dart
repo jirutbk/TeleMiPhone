@@ -13,6 +13,9 @@ class MyApp extends StatelessWidget {
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
       title: 'TeleMiPhone',
+      theme: ThemeData(
+        primarySwatch: Colors.grey
+      ),
       home: MainScreen(), //เรียก splash screen
     );
   }
@@ -32,11 +35,11 @@ class _MainScreen extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TeleMiPhone'),
+        title: Text('TeleMiPhone', style: TextStyle(color: Colors.white, fontSize: 18.0)),
         backgroundColor: Colors.pink,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert, color: Colors.white),
             tooltip: 'เกี่ยวกับแอพพลิเคชั่น',
             onPressed: () {
               showAboutDialog(

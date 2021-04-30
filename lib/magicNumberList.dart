@@ -45,7 +45,7 @@ class _MagicNumberListState extends State<MagicNumberList> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            'เลขศาสตร์',
+            'เลขศาสตร์', style: TextStyle(color: Colors.white)
           ),
           backgroundColor: Colors.pink,
         ),
