@@ -73,16 +73,16 @@ class _MainScreen extends State<MainScreen> {
                     color: Colors.pinkAccent,
                   ),
                 )),
-            ListTile(title: Text('หมายเลขโทรศัพท์'), onTap: () {Navigator.pop(context);
+            ListTile(title: Text('หมายเลขโทรศัพท์'), leading: Icon(Icons.mobile_friendly_rounded, color: Colors.green), onTap: () {Navigator.pop(context);
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => PhoneNumberPage()));}),
             ListTile(
-              title: Text('เลขทะเบียนรถ'),
+              title: Text('เลขทะเบียนรถ'), leading: Icon(Icons.car_rental, color: Colors.blue),
               onTap: () {},
             ),
-            ListTile(title: Text('ปฏิทินจันทรคติ'), onTap: () {}),
+            ListTile(title: Text('ปฏิทินจันทรคติ'), leading: Icon(Icons.calendar_today, color: Colors.orange), onTap: () {}),
             ListTile(
-              title: Text('แสดงเลขศาสตร์'),
+              title: Text('แสดงเลขศาสตร์'), leading: Icon(Icons.format_list_numbered, color: Colors.red),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
@@ -90,7 +90,7 @@ class _MainScreen extends State<MainScreen> {
               },
             ),
             ListTile(
-              title: Text('เกี่ยวกับแอพพลิเคชั่น'),
+              title: Text('เกี่ยวกับแอพพลิเคชั่น'), leading: Icon(Icons.api_sharp, color: Colors.pink),
               onTap: () {
                 Navigator.pop(context);
                 showAboutDialog(

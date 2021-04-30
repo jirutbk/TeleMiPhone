@@ -59,12 +59,12 @@ class _MagicNumberListState extends State<MagicNumberList> {
                   children: [
                     Card(
                       child: ListTile(
-                        leading: Icon(Icons.search),
+                        leading: Icon(Icons.format_list_numbered, color: Colors.red),
                         title: TextField(
                           controller: myController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                              hintText: 'ค้นหา', border: InputBorder.none),
+                              hintText: 'ป้อนตัวเลข', border: InputBorder.none),
                           onChanged: onSearchTextChanged,
                         ),
                         trailing: IconButton(
