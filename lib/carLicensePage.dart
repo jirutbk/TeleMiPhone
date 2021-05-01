@@ -10,10 +10,10 @@ class CarLicensePage extends StatefulWidget {
 
 class _CarLicensePageState extends State<CarLicensePage> {
   List _numbers = [];
-  List _days = [];
+  List _charValue = [];
   List _searchResult = [];
   final myController = TextEditingController();
-  var exp = RegExp(r"^[0-9]*[ก-ฮ]+[\s]*[0-9]+$");
+  var exp = RegExp(r"^[0-9]*[ก-ฮ]+[0-9]+$");
 
   _CarLicensePageState() {
     this.readJson();
@@ -25,12 +25,12 @@ class _CarLicensePageState extends State<CarLicensePage> {
         await rootBundle.loadString('assets/MagicNumber.json');
     final data = await json.decode(response);
 
-    final String response2 = await rootBundle.loadString('assets/Days.json');
+    final String response2 = await rootBundle.loadString('assets/charValue.json');
     final data2 = json.decode(response2);
 
     setState(() {
       _numbers = data["number"];
-      _days = data2["days"];
+      _charValue = data2["charValue"];
     });
   }
 
@@ -39,9 +39,9 @@ class _CarLicensePageState extends State<CarLicensePage> {
 
     data.runes.forEach((rune) {
       if (!isNumeric(String.fromCharCode(rune))) //ถ้าเป็นตัวอักษร
-        _days.forEach((item) {
-          if (item["badChar"].contains(String.fromCharCode(rune)))
-            sum += int.parse(item["id"]);
+        _charValue.forEach((item) {
+          if (item["charSet"].contains(String.fromCharCode(rune)))
+            sum += int.parse(item["value"]);
         });
       else
         sum += int.parse(String.fromCharCode(rune));

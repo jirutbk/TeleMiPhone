@@ -1,0 +1,40 @@
+{
+   "charValue": [
+      {
+        "value": "1",
+        "charSet": "ก ด ท ถ ภ ฤ A I J Q Y"
+      },
+      {
+        "value": "2",
+        "charSet": "ข ช บ ป ง B K R"
+      },
+      {
+        "value": "3",
+        "charSet": "ฆ ฑ ฒ ต ฃ C G L S"
+      },
+      {
+        "value": "4",
+        "charSet": "ค ธ ร ญ ษ D M T"
+      },
+      {
+        "value": "5",
+        "charSet": "ฉ ณ ฌ น ม ห ฮ ฎ ฬ E H N X"
+      },
+      {
+        "value": "6",
+        "charSet": "จ ล ว อ U V W"
+      },
+      {
+        "value": "7",
+        "charSet": "ศ ส ซ O Z"
+      },
+      {
+        "value": "8",
+        "charSet": "ย พ ฟ ผ ฝ F P"
+      },
+      {
+        "value": "9",
+        "charSet": "ฏ ฐ"
+      }
+    ]
+}
