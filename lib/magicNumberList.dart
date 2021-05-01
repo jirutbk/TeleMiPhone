@@ -8,7 +8,7 @@ class MagicNumberList extends StatefulWidget {
 }
 
 class _MagicNumberListState extends State<MagicNumberList> {
-  List _items = [];
+  List _numbers = [];
   List _searchResult = [];
   final myController = TextEditingController();
 
@@ -22,18 +22,18 @@ class _MagicNumberListState extends State<MagicNumberList> {
         await rootBundle.loadString('assets/MagicNumber.json');
     final data = await json.decode(response);
     setState(() {
-      _items = data["number"];
+      _numbers = data["number"];
     });
   }
 
   onSearchTextChanged(String text) async {
     _searchResult.clear();
     if (text.isEmpty) {
-      _searchResult = List.of(_items); //copy list member
+      _searchResult = List.of(_numbers); //copy list member
       setState(() {});
       return;
     }
-    _items.forEach((item) {
+    _numbers.forEach((item) {
       if (item["num"].contains(text)) _searchResult.add(item);
     });
 
@@ -78,7 +78,7 @@ class _MagicNumberListState extends State<MagicNumberList> {
                     ),
 
                     // Display the data loaded from sample.json
-                    _items.length > 0
+                    _numbers.length > 0
                         ? Expanded(
                             child: ListView.builder(
                               itemCount: _searchResult.length,

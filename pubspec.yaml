@@ -51,6 +51,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/MagicNumber.json
+    - assets/Days.json
     - assets/myLogo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -9,7 +9,7 @@ class PhoneNumberPage extends StatefulWidget {
 }
 
 class _PhoneNumberPageState extends State<PhoneNumberPage> {
-  List _items = [];
+  List _numbers = [];
   List _searchResult = [];
   final myController = TextEditingController();
   var exp = RegExp(r"^[\d]{10}$");
@@ -24,7 +24,7 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
         await rootBundle.loadString('assets/MagicNumber.json');
     final data = await json.decode(response);
     setState(() {
-      _items = data["number"];
+      _numbers = data["number"];
     });
   }
 
@@ -44,7 +44,7 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
     if (sum > 0) {
       Toast.show("ผลรวมเท่ากับ $sum", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-      _items.forEach((item) {
+      _numbers.forEach((item) {
         if (item["num"].contains(sum.toString())) _searchResult.add(item);
       });
     }
@@ -91,7 +91,7 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                   ),
 
                   // Display the data loaded from sample.json
-                  _items.length > 0
+                  _numbers.length > 0
                       ? Expanded(
                           child: ListView.builder(
                             itemCount: _searchResult.length,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:telemiphone/magicNumberList.dart';
 import 'package:telemiphone/phoneNumberPage.dart';
+import 'package:telemiphone/carLicensePage.dart';
 //import 'package:telemiphone/splashScreen.dart';
 
 void main() {
@@ -78,8 +79,9 @@ class _MainScreen extends State<MainScreen> {
                     MaterialPageRoute(builder: (context) => PhoneNumberPage()));}),
             ListTile(
               title: Text('เลขทะเบียนรถ'), leading: Icon(Icons.car_rental, color: Colors.blue),
-              onTap: () {},
-            ),
+               onTap: () {Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CarLicensePage()));}),
             ListTile(title: Text('ปฏิทินจันทรคติ'), leading: Icon(Icons.calendar_today, color: Colors.orange), onTap: () {}),
             ListTile(
               title: Text('แสดงเลขศาสตร์'), leading: Icon(Icons.format_list_numbered, color: Colors.red),
@@ -113,15 +115,6 @@ class _MainScreen extends State<MainScreen> {
           height: 50.0,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.pinkAccent,
-        onPressed: () {},
-        child: Icon(
-          Icons.api_sharp,
-          color: Colors.white,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
