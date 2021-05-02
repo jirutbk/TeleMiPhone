@@ -13,7 +13,7 @@ class _NamePageState extends State<NamePage> {
   List _charValue = [];
   List _searchResult = [];
   final myController = TextEditingController();
-  var exp = RegExp(r"^[ก-ฮA-Za-z]+$");
+  var exp = RegExp(r"^[ก-ฮะ-์A-Za-z\s]+$");
 
   _NamePageState() {
     this.readJson();
@@ -38,6 +38,7 @@ class _NamePageState extends State<NamePage> {
   int calculate(String data) {
     int sum = 0;
     data = data.toUpperCase();
+    data = data.replaceAll(new RegExp(r"\s+"), ""); //ลบชื่อว่าง
     data.runes.forEach((rune) {
       if (!isNumeric(String.fromCharCode(rune))) //ถ้าเป็นตัวอักษร
         _charValue.forEach((item) {
@@ -72,9 +73,12 @@ class _NamePageState extends State<NamePage> {
     if (sum > 0) {
       Toast.show("ผลรวมเท่ากับ $sum", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-      _numbers.forEach((item) {
-        if (item["num"].contains(sum.toString())) _searchResult.add(item);
-      });
+      for(var item in _numbers) {
+        if (item["num"].contains(sum.toString())) {
+          _searchResult.add(item);
+          break;
+        }
+      }
     }
     setState(() {});
   }

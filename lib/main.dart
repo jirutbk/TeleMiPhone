@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:telemiphone/magicNumberList.dart';
 import 'package:telemiphone/phoneNumberPage.dart';
 import 'package:telemiphone/carLicensePage.dart';
+import 'package:telemiphone/namePage.dart';
 //import 'package:telemiphone/splashScreen.dart';
 
 void main() {
@@ -15,9 +16,7 @@ class MyApp extends StatelessWidget {
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
       title: 'TeleMiPhone',
-      theme: ThemeData(
-        primarySwatch: Colors.grey
-      ),
+      theme: ThemeData(primarySwatch: Colors.grey),
       home: MainScreen(), //เรียก splash screen
     );
   }
@@ -37,7 +36,8 @@ class _MainScreen extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('TeleMiPhone', style: TextStyle(color: Colors.white, fontSize: 18.0)),
+        title: Text('TeleMiPhone',
+            style: TextStyle(color: Colors.white, fontSize: 18.0)),
         backgroundColor: Colors.pink,
         actions: <Widget>[
           IconButton(
@@ -74,17 +74,44 @@ class _MainScreen extends State<MainScreen> {
                     color: Colors.pinkAccent,
                   ),
                 )),
-            ListTile(title: Text('หมายเลขโทรศัพท์'), leading: Icon(Icons.mobile_friendly_rounded, color: Colors.green), onTap: () {Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PhoneNumberPage()));}),
             ListTile(
-              title: Text('เลขทะเบียนรถ'), leading: Icon(Icons.car_rental, color: Colors.blue),
-               onTap: () {Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CarLicensePage()));}),
-            ListTile(title: Text('ปฏิทินจันทรคติ'), leading: Icon(Icons.calendar_today, color: Colors.orange), onTap: () {}),
+                title: Text('หมายเลขโทรศัพท์'),
+                leading:
+                    Icon(Icons.mobile_friendly_rounded, color: Colors.green),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PhoneNumberPage()));
+                }),
             ListTile(
-              title: Text('แสดงเลขศาสตร์'), leading: Icon(Icons.format_list_numbered, color: Colors.red),
+                title: Text('เลขทะเบียนรถ'),
+                leading: Icon(Icons.car_rental, color: Colors.blue),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CarLicensePage()));
+                }),
+            ListTile(
+                title: Text('คำนวณชื่อมงคล'),
+                leading: Icon(Icons.contact_page, color: Colors.amber),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NamePage()));
+                }),
+            ListTile(
+                title: Text('ปฏิทินจันทรคติ'),
+                leading: Icon(Icons.calendar_today, color: Colors.orange),
+                onTap: () {}),
+            ListTile(
+              title: Text('แสดงเลขศาสตร์'),
+              leading: Icon(Icons.format_list_numbered, color: Colors.red),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
@@ -92,7 +119,8 @@ class _MainScreen extends State<MainScreen> {
               },
             ),
             ListTile(
-              title: Text('เกี่ยวกับแอพพลิเคชั่น'), leading: Icon(Icons.api_sharp, color: Colors.pink),
+              title: Text('เกี่ยวกับแอพพลิเคชั่น'),
+              leading: Icon(Icons.api_sharp, color: Colors.pink),
               onTap: () {
                 Navigator.pop(context);
                 showAboutDialog(

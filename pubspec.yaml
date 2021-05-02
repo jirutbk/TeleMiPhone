@@ -51,6 +51,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/MagicNumber.json
+    - assets/MagicNumberForName.json
     - assets/Days.json
     - assets/charValue.json
     - assets/myLogo.png

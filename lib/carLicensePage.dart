@@ -25,7 +25,8 @@ class _CarLicensePageState extends State<CarLicensePage> {
         await rootBundle.loadString('assets/MagicNumber.json');
     final data = await json.decode(response);
 
-    final String response2 = await rootBundle.loadString('assets/charValue.json');
+    final String response2 =
+        await rootBundle.loadString('assets/charValue.json');
     final data2 = json.decode(response2);
 
     setState(() {
@@ -71,9 +72,13 @@ class _CarLicensePageState extends State<CarLicensePage> {
     if (sum > 0) {
       Toast.show("ผลรวมเท่ากับ $sum", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-      _numbers.forEach((item) {
-        if (item["num"].contains(sum.toString())) _searchResult.add(item);
-      });
+
+      for (var item in _numbers) {
+        if (item["num"].contains(sum.toString())) {
+          _searchResult.add(item);
+          break;
+        }
+      }
     }
     setState(() {});
   }
