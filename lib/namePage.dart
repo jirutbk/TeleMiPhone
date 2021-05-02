@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class NamePage extends StatefulWidget {
   @override
@@ -120,6 +121,8 @@ class _NamePageState extends State<NamePage> {
                       ),
                     ),
                   ),
+
+
 
                   // Display the data loaded from sample.json
                   _numbers.length > 0

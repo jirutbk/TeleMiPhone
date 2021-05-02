@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.starpac.telemiphone">
+    package="com.telemicom.telemiphone">
    <application
         android:label="TeleMiPhone"
         android:icon="@mipmap/ic_launcher">
