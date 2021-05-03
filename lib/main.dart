@@ -31,6 +31,16 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreen extends State<MainScreen> {
   String version = "1.5.0";
+  var _days = [
+    'อาทิตย์',
+    'จันทร์',
+    'อังคาร',
+    'พุธกลางวัน',
+    'พุธกลางคืน',
+    'พฤหัสบดี',
+    'ศุกร์',
+    'เสาร์'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +67,23 @@ class _MainScreen extends State<MainScreen> {
       body: Material(
           color: Colors.pink[100],
           child: Center(
-              child: Text('ศาสตร์แห่งตัวเลข',
-                  style: TextStyle(color: Colors.white, fontSize: 20.0)))),
+              child: Column(children: [
+            Text('ศาสตร์แห่งตัวเลข',
+                style: TextStyle(color: Colors.white, fontSize: 20.0)),
+
+
+
+
+DropdownButton<String>(
+                items: _days.map((String dropDownStringItem) {
+              return DropdownMenuItem<String>(
+                  value: dropDownStringItem, child: Text(dropDownStringItem));
+            })              ),
+
+
+
+
+          ]))),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -100,10 +125,8 @@ class _MainScreen extends State<MainScreen> {
                 leading: Icon(Icons.contact_page, color: Colors.amber),
                 onTap: () {
                   Navigator.pop(context);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NamePage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NamePage()));
                 }),
             ListTile(
                 title: Text('ปฏิทินจันทรคติ'),
