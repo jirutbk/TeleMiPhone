@@ -31,16 +31,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreen extends State<MainScreen> {
   String version = "1.5.0";
-  var _days = [
-    'อาทิตย์',
-    'จันทร์',
-    'อังคาร',
-    'พุธกลางวัน',
-    'พุธกลางคืน',
-    'พฤหัสบดี',
-    'ศุกร์',
-    'เสาร์'
-  ];
+  int day = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -69,20 +60,29 @@ class _MainScreen extends State<MainScreen> {
           child: Center(
               child: Column(children: [
             Text('ศาสตร์แห่งตัวเลข',
-                style: TextStyle(color: Colors.white, fontSize: 20.0)),
-
-
-
-
-DropdownButton<String>(
-                items: _days.map((String dropDownStringItem) {
-              return DropdownMenuItem<String>(
-                  value: dropDownStringItem, child: Text(dropDownStringItem));
-            })              ),
-
-
-
-
+                style: TextStyle(color: Colors.white, fontSize: 20.0)),            
+                 Card(
+                    child: ListTile(
+                  leading: Text("วันเกิด "),
+                  title: DropdownButton(
+                      value: day,
+                      items: [
+                        DropdownMenuItem(child: Text("กรุณาเลือกวันเกิด"), value: 0),
+                        DropdownMenuItem(child: Text("อาทิตย์"), value: 1),
+                        DropdownMenuItem(child: Text("จันทร์"), value: 2),
+                        DropdownMenuItem(child: Text("อังคาร"), value: 3),
+                        DropdownMenuItem(child: Text("พุธ(กลางวัน)"), value: 4),
+                        DropdownMenuItem(child: Text("พุธ(กลางคืน)"), value: 5),
+                        DropdownMenuItem(child: Text("พฤหัสบดี"), value: 6),
+                        DropdownMenuItem(child: Text("ศุกร์"), value: 7),
+                        DropdownMenuItem(child: Text("เสาร์"), value: 8)
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          day = value;
+                        });
+                      }),
+                ))
           ]))),
       drawer: Drawer(
         child: ListView(
