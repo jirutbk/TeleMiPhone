@@ -1,4 +1,4 @@
-package com.starpac.telemiphone
+package telemicom.telemiphone
 
 import io.flutter.embedding.android.FlutterActivity
 

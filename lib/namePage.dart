@@ -13,6 +13,9 @@ class _NamePageState extends State<NamePage> {
   List _numbers = [];
   List _charValue = [];
   List _searchResult = [];
+  List _days = [];
+  double level = 0.0;
+  String badchar = "";
   final myController = TextEditingController();
   var exp = RegExp(r"^[ก-ฮะ-์A-Za-z\s]+$");
 
@@ -30,9 +33,14 @@ class _NamePageState extends State<NamePage> {
         await rootBundle.loadString('assets/charValue.json');
     final data2 = json.decode(response2);
 
+    final String response3 =
+        await rootBundle.loadString('assets/Days.json');
+    final data3 = json.decode(response3);
+
     setState(() {
       _numbers = data["number"];
       _charValue = data2["charValue"];
+      _days = data3["days"];
     });
   }
 
@@ -74,8 +82,9 @@ class _NamePageState extends State<NamePage> {
     if (sum > 0) {
       Toast.show("ผลรวมเท่ากับ $sum", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
-      for(var item in _numbers) {
+      for (var item in _numbers) {
         if (item["num"].contains(sum.toString())) {
+          level = double.parse(item["level"]);
           _searchResult.add(item);
           break;
         }
@@ -116,13 +125,34 @@ class _NamePageState extends State<NamePage> {
                         icon: Icon(Icons.cancel),
                         onPressed: () {
                           myController.clear();
+                          level = 0.0;
+                          badchar = "";
                           onSearchPressed();
                         },
                       ),
                     ),
                   ),
 
-
+                  Card(
+                      child: ListTile(
+                    leading: Text("ระดับ $level"),
+                    title: RatingBar.builder(
+                      initialRating: level,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
+                    subtitle: Text("กาลกินี : $badchar"),
+                  )),
 
                   // Display the data loaded from sample.json
                   _numbers.length > 0
