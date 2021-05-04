@@ -142,7 +142,7 @@ class _MainScreen extends State<MainScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CarLicensePage()));
+                          builder: (context) => CarLicensePage(day: day)));
                 }),
             ListTile(
                 title: Text('คำนวณชื่อมงคล'),

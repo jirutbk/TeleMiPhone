@@ -173,7 +173,7 @@ class _NamePageState extends State<NamePage> {
                         print(rating);
                       },
                     ),
-                    subtitle: Text("กาลกินี : $badchar"),
+                    subtitle: Text("กาลกิณี : $badchar"),
                   )),
 
                   // Display the data loaded from sample.json

@@ -146,7 +146,7 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                         print(rating);
                       },
                     ),
-                    subtitle: Text("กาลกินี : $badchar"),
+                    subtitle: Text("กาลกิณี : $badchar"),
                   )),
 
                   // Display the data loaded from sample.json

@@ -2,20 +2,28 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CarLicensePage extends StatefulWidget {
+  final int day;
+  CarLicensePage({this.day});
+
   @override
-  _CarLicensePageState createState() => _CarLicensePageState();
+  _CarLicensePageState createState() => _CarLicensePageState(day: day);
 }
 
 class _CarLicensePageState extends State<CarLicensePage> {
   List _numbers = [];
   List _charValue = [];
   List _searchResult = [];
+  List _days = [];
+  int day;
+  double level = 0.0;
+  String badchar = "  ";
   final myController = TextEditingController();
   var exp = RegExp(r"^[0-9]*[ก-ฮ]+[0-9]+$");
 
-  _CarLicensePageState() {
+  _CarLicensePageState({this.day}) {
     this.readJson();
   }
 
@@ -29,9 +37,13 @@ class _CarLicensePageState extends State<CarLicensePage> {
         await rootBundle.loadString('assets/charValue.json');
     final data2 = json.decode(response2);
 
+    final String response3 = await rootBundle.loadString('assets/Days.json');
+    final data3 = json.decode(response3);
+
     setState(() {
       _numbers = data["number"];
       _charValue = data2["charValue"];
+      _days = data3["days"];
     });
   }
 
@@ -57,6 +69,21 @@ class _CarLicensePageState extends State<CarLicensePage> {
     return double.tryParse(s) != null;
   }
 
+  void badChar() {
+    String data;
+    badchar = "  ";
+
+    data = myController.text.replaceAll(new RegExp(r"\s+"), ""); //ลบชื่อว่าง
+    if (day == 0)
+      Toast.show("กรุณาระบุวันเกิดก่อน.. !", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+
+    data.runes.forEach((rune) {
+      if (_days[day - 1]["badChar"].contains(String.fromCharCode(rune)))
+        badchar += " " + String.fromCharCode(rune);
+    });
+  }
+
   void onSearchPressed() async {
     int sum = 0;
     _searchResult.clear();
@@ -68,6 +95,9 @@ class _CarLicensePageState extends State<CarLicensePage> {
     }
 
     sum = calculate(myController.text);
+    badChar();
+
+    print("วันเกิดคือ $day");
 
     if (sum > 0) {
       Toast.show("ผลรวมเท่ากับ $sum", context,
@@ -75,6 +105,7 @@ class _CarLicensePageState extends State<CarLicensePage> {
 
       for (var item in _numbers) {
         if (item["num"].contains(sum.toString())) {
+          level = double.parse(item["level"]);
           _searchResult.add(item);
           break;
         }
@@ -115,11 +146,35 @@ class _CarLicensePageState extends State<CarLicensePage> {
                         icon: Icon(Icons.cancel),
                         onPressed: () {
                           myController.clear();
+                          level = 0.0;
+                          badchar = "  ";
                           onSearchPressed();
                         },
                       ),
                     ),
                   ),
+
+                  Card(
+                      child: ListTile(
+                    leading: Text("ระดับ $level"),
+                    title: RatingBar.builder(
+                      initialRating: level,
+                      ignoreGestures: true, //ปิดไม่ให้ tab
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
+                    subtitle: Text("กาลกิณี : $badchar"),
+                  )),
 
                   // Display the data loaded from sample.json
                   _numbers.length > 0
