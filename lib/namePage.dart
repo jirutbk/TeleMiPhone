@@ -138,6 +138,7 @@ class _NamePageState extends State<NamePage> {
                     leading: Text("ระดับ $level"),
                     title: RatingBar.builder(
                       initialRating: level,
+                      ignoreGestures: true,    //ปิดไม่ให้ tab
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,

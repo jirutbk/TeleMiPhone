@@ -3,6 +3,7 @@ import 'package:telemiphone/magicNumberList.dart';
 import 'package:telemiphone/phoneNumberPage.dart';
 import 'package:telemiphone/carLicensePage.dart';
 import 'package:telemiphone/namePage.dart';
+import 'package:toast/toast.dart';
 //import 'package:telemiphone/splashScreen.dart';
 
 void main() {
@@ -30,12 +31,23 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreen extends State<MainScreen> {
+  final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   String version = "1.5.0";
   int day = 0;
+
+  void _openDrawer() {
+    if (day != 0)
+      _drawerKey.currentState.openDrawer();
+    else
+      Toast.show("กรุณาเลือกวันเกิด !", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _drawerKey,
+      drawerEnableOpenDragGesture: false,   //ปิดไม่ให้ไสลด์ drawer
       appBar: AppBar(
         title: Text('TeleMiPhone',
             style: TextStyle(color: Colors.white, fontSize: 18.0)),
@@ -58,32 +70,44 @@ class _MainScreen extends State<MainScreen> {
       body: Material(
           color: Colors.pink[100],
           child: Center(
-              child: Column(children: [
-            Text('ศาสตร์แห่งตัวเลข',
-                style: TextStyle(color: Colors.white, fontSize: 20.0)),            
-                 Card(
-                    child: ListTile(
-                  leading: Text("วันเกิด "),
-                  title: DropdownButton(
-                      value: day,
-                      items: [
-                        DropdownMenuItem(child: Text("กรุณาเลือกวันเกิด"), value: 0),
-                        DropdownMenuItem(child: Text("อาทิตย์"), value: 1),
-                        DropdownMenuItem(child: Text("จันทร์"), value: 2),
-                        DropdownMenuItem(child: Text("อังคาร"), value: 3),
-                        DropdownMenuItem(child: Text("พุธ(กลางวัน)"), value: 4),
-                        DropdownMenuItem(child: Text("พุธ(กลางคืน)"), value: 5),
-                        DropdownMenuItem(child: Text("พฤหัสบดี"), value: 6),
-                        DropdownMenuItem(child: Text("ศุกร์"), value: 7),
-                        DropdownMenuItem(child: Text("เสาร์"), value: 8)
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          day = value;
-                        });
-                      }),
-                ))
-          ]))),
+              child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child: Column(children: [
+                    Image.asset(
+                      "assets/myLogo.png",
+                      width: 100,
+                    ),
+                    Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                        child: Text('ศาสตร์แห่งตัวเลข',
+                            style: TextStyle(
+                                color: Colors.white, fontSize: 20.0))),
+                    Card(
+                        child: ListTile(
+                      leading: Text("วันเกิด "),
+                      title: DropdownButton(
+                          value: day,
+                          items: [
+                            DropdownMenuItem(
+                                child: Text("กรุณาเลือกวันเกิด"), value: 0),
+                            DropdownMenuItem(child: Text("อาทิตย์"), value: 1),
+                            DropdownMenuItem(child: Text("จันทร์"), value: 2),
+                            DropdownMenuItem(child: Text("อังคาร"), value: 3),
+                            DropdownMenuItem(
+                                child: Text("พุธ(กลางวัน)"), value: 4),
+                            DropdownMenuItem(
+                                child: Text("พุธ(กลางคืน)"), value: 5),
+                            DropdownMenuItem(child: Text("พฤหัสบดี"), value: 6),
+                            DropdownMenuItem(child: Text("ศุกร์"), value: 7),
+                            DropdownMenuItem(child: Text("เสาร์"), value: 8)
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              day = value;
+                            });
+                          }),
+                    ))
+                  ])))),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -166,6 +190,15 @@ class _MainScreen extends State<MainScreen> {
           height: 50.0,
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.pinkAccent,
+        onPressed: _openDrawer,
+        child: Icon(
+          Icons.api_sharp,
+          color: Colors.white,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
