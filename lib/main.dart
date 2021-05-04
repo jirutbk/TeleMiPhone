@@ -150,12 +150,12 @@ class _MainScreen extends State<MainScreen> {
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => NamePage()));
+                      MaterialPageRoute(builder: (context) => NamePage(day: day)));
                 }),
-            ListTile(
+   /*         ListTile(
                 title: Text('ปฏิทินจันทรคติ'),
                 leading: Icon(Icons.calendar_today, color: Colors.orange),
-                onTap: () {}),
+                onTap: () {}),*/
             ListTile(
               title: Text('แสดงเลขศาสตร์'),
               leading: Icon(Icons.format_list_numbered, color: Colors.red),

@@ -5,8 +5,11 @@ import 'package:toast/toast.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class NamePage extends StatefulWidget {
+  final int day;
+  NamePage({this.day});
+
   @override
-  _NamePageState createState() => _NamePageState();
+  _NamePageState createState() => _NamePageState(day: day);
 }
 
 class _NamePageState extends State<NamePage> {
@@ -14,12 +17,13 @@ class _NamePageState extends State<NamePage> {
   List _charValue = [];
   List _searchResult = [];
   List _days = [];
+  int day;
   double level = 0.0;
-  String badchar = "";
+  String badchar = "  ";
   final myController = TextEditingController();
   var exp = RegExp(r"^[ก-ฮะ-์A-Za-z\s]+$");
 
-  _NamePageState() {
+  _NamePageState({this.day}) {
     this.readJson();
   }
 
@@ -33,8 +37,7 @@ class _NamePageState extends State<NamePage> {
         await rootBundle.loadString('assets/charValue.json');
     final data2 = json.decode(response2);
 
-    final String response3 =
-        await rootBundle.loadString('assets/Days.json');
+    final String response3 = await rootBundle.loadString('assets/Days.json');
     final data3 = json.decode(response3);
 
     setState(() {
@@ -60,6 +63,21 @@ class _NamePageState extends State<NamePage> {
     return sum;
   }
 
+  void badChar() {
+    String data;
+    badchar = "";
+
+    data = myController.text.replaceAll(new RegExp(r"\s+"), ""); //ลบชื่อว่าง
+    if(day == 0) 
+      Toast.show("กรุณาระบุวันเกิดก่อน.. !", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+
+    data.runes.forEach((rune) {
+      if (_days[day-1]["badChar"].contains(String.fromCharCode(rune)))
+        badchar += " " + String.fromCharCode(rune);
+    });
+  }
+
   bool isNumeric(String s) {
     if (s == null) {
       return false;
@@ -78,6 +96,9 @@ class _NamePageState extends State<NamePage> {
     }
 
     sum = calculate(myController.text);
+    badChar();
+
+    print("วันเกิดคือ $day");
 
     if (sum > 0) {
       Toast.show("ผลรวมเท่ากับ $sum", context,
@@ -138,7 +159,7 @@ class _NamePageState extends State<NamePage> {
                     leading: Text("ระดับ $level"),
                     title: RatingBar.builder(
                       initialRating: level,
-                      ignoreGestures: true,    //ปิดไม่ให้ tab
+                      ignoreGestures: true, //ปิดไม่ให้ tab
                       minRating: 1,
                       direction: Axis.horizontal,
                       allowHalfRating: true,
