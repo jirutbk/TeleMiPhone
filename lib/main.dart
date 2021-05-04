@@ -132,7 +132,7 @@ class _MainScreen extends State<MainScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PhoneNumberPage()));
+                          builder: (context) => PhoneNumberPage(day: day)));
                 }),
             ListTile(
                 title: Text('เลขทะเบียนรถ'),

@@ -4,49 +4,49 @@
         "id": "1",
         "dayName": "อาทิตย์",
         "badNum": "6",
-        "badChar": "ศ ษ ส ห ฬ อ"
+        "badChar": "ศ ษ ส ห ฬ อ 6"
       },
       {
         "id": "2",
         "dayName": "จันทร์",
         "badNum": "1",
-        "badChar": "ะ า ิ ี ึ ื ุ ู โ ไ ใ ำ "
+        "badChar": "ะ า ิ ี ึ ื ุ ู โ ไ ใ ำ 1"
       },
       {
         "id": "3",
         "dayName": "อังคาร",
         "badNum": "2",
-        "badChar": "ก ข ค ฆ ง"
+        "badChar": "ก ข ค ฆ ง 2"
       },
       {
         "id": "4",
         "dayName": "พุธ(กลางวัน)",
         "badNum": "3",
-        "badChar": "จ ฉ ช ฌ ญ"
+        "badChar": "จ ฉ ช ฌ ญ 3"
       },
       {
         "id": "5",
         "dayName": "พุธ(กลางคืน)",
         "badNum": "5",
-        "badChar": "บ ป ผ ฝ พ ฟ ภ ม"
+        "badChar": "บ ป ผ ฝ พ ฟ ภ ม 5"
       },
       {
         "id": "6",
         "dayName": "พฤหัสบดี",
         "badNum": "7",
-        "badChar": "ด ต ถ ท ธ น"
+        "badChar": "ด ต ถ ท ธ น 7"
       },
       {
         "id": "7",
         "dayName": "ศุกร์",
         "badNum": "8",
-        "badChar": "ย ร ล ว"
+        "badChar": "ย ร ล ว 8"
       },
       {
         "id": "8",
         "dayName": "เสาร์",
         "badNum": "4",
-        "badChar": "ฎ ฏ ฐ ฑ ฒ ณ"
+        "badChar": "ฎ ฏ ฐ ฑ ฒ ณ 4"
       }
     ]
 }

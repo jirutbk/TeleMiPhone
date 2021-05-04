@@ -2,19 +2,27 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PhoneNumberPage extends StatefulWidget {
+  final int day;
+  PhoneNumberPage({this.day});
+
   @override
-  _PhoneNumberPageState createState() => _PhoneNumberPageState();
+  _PhoneNumberPageState createState() => _PhoneNumberPageState(day: day);
 }
 
 class _PhoneNumberPageState extends State<PhoneNumberPage> {
   List _numbers = [];
   List _searchResult = [];
+  List _days = [];
+  int day;
+  double level = 0.0;
+  String badchar = "  ";
   final myController = TextEditingController();
   var exp = RegExp(r"^[\d]{10}$");
 
-  _PhoneNumberPageState() {
+  _PhoneNumberPageState({this.day}) {
     this.readJson();
   }
 
@@ -23,8 +31,28 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
     final String response =
         await rootBundle.loadString('assets/MagicNumber.json');
     final data = await json.decode(response);
+
+    final String response3 = await rootBundle.loadString('assets/Days.json');
+    final data3 = json.decode(response3);
+
     setState(() {
       _numbers = data["number"];
+      _days = data3["days"];
+    });
+  }
+
+  void badChar() {
+    String data;
+    badchar = "  ";
+
+    data = myController.text.replaceAll(new RegExp(r"\s+"), ""); //ลบชื่อว่าง
+    if (day == 0)
+      Toast.show("กรุณาระบุวันเกิดก่อน.. !", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
+
+    data.runes.forEach((rune) {
+      if (_days[day - 1]["badChar"].contains(String.fromCharCode(rune)))
+        badchar += " " + String.fromCharCode(rune);
     });
   }
 
@@ -41,11 +69,17 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
       sum += int.parse(String.fromCharCode(rune));
     });
 
+    badChar();
+    print("วันเกิดคือ $day");
+
     if (sum > 0) {
       Toast.show("ผลรวมเท่ากับ $sum", context,
           duration: Toast.LENGTH_LONG, gravity: Toast.CENTER);
       _numbers.forEach((item) {
-        if (item["num"].contains(sum.toString())) _searchResult.add(item);
+        if (item["num"].contains(sum.toString())) {
+          level = double.parse(item["level"]);
+          _searchResult.add(item);
+        }
       });
     }
     setState(() {});
@@ -72,7 +106,8 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                 children: [
                   Card(
                     child: ListTile(
-                      leading: Icon(Icons.mobile_friendly_rounded,color: Colors.green),
+                      leading: Icon(Icons.mobile_friendly_rounded,
+                          color: Colors.green),
                       title: TextField(
                         controller: myController,
                         keyboardType: TextInputType.number,
@@ -84,11 +119,35 @@ class _PhoneNumberPageState extends State<PhoneNumberPage> {
                         icon: Icon(Icons.cancel),
                         onPressed: () {
                           myController.clear();
+                          level = 0.0;
+                          badchar = "  ";
                           onSearchPressed();
                         },
                       ),
                     ),
                   ),
+
+                  Card(
+                      child: ListTile(
+                    leading: Text("ระดับ $level"),
+                    title: RatingBar.builder(
+                      initialRating: level,
+                      ignoreGestures: true, //ปิดไม่ให้ tab
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
+                    subtitle: Text("กาลกินี : $badchar"),
+                  )),
 
                   // Display the data loaded from sample.json
                   _numbers.length > 0

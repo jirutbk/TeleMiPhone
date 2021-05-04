@@ -65,7 +65,7 @@ class _NamePageState extends State<NamePage> {
 
   void badChar() {
     String data;
-    badchar = "";
+    badchar = "  ";
 
     data = myController.text.replaceAll(new RegExp(r"\s+"), ""); //ลบชื่อว่าง
     if(day == 0) 
@@ -147,7 +147,7 @@ class _NamePageState extends State<NamePage> {
                         onPressed: () {
                           myController.clear();
                           level = 0.0;
-                          badchar = "";
+                          badchar = "  ";
                           onSearchPressed();
                         },
                       ),
