@@ -32,7 +32,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreen extends State<MainScreen> {
   final GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  String version = "1.5.0";
+  String version = "1.5.1";
   int day = 0;
 
   void _openDrawer() {
