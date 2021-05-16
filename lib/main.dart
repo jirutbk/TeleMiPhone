@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       // Hide the debug banner
       debugShowCheckedModeBanner: false,
       title: 'TeleMiPhone',
-      theme: ThemeData(primarySwatch: Colors.grey),
+      theme: ThemeData(primarySwatch: Colors.pink),
       home: MainScreen(), //เรียก splash screen
     );
   }
